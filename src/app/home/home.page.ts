@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { LoginPage } from '../login/login.page';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,20 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private modal: ModalController) {
+    setTimeout(() => {
+      this.lockApp();
+    }, 2000);
+  }
+async lockApp(){
+const modal =  await this.modal.create({
+  component: LoginPage,
+  componentProps: {
+    isModal : true
+  },
+  backdropDismiss: false,
+  cssClass: 'login-modal'
+});
+modal.present();
+}
 }
